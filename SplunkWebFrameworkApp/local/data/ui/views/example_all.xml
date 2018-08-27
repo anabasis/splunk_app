@@ -1,0 +1,131 @@
+<dashboard script="example_all.js" >
+    <label>02.Collection of Views</label>
+    <row>
+        <panel>
+            <html>
+                <p>This example shows how to set up the most common views using JavaScript. Tokens are used to keep the search controls in sync with the search manager.</p>
+                <table>
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 80%;">
+                            <h3>SearchBar</h3>
+                            <div id="mysearchbar"></div>
+                        </td>
+                        <td style="width: 20%;">
+                            <h3>TimeRange<br/>(also included with SearchBar)</h3>
+                            <div id="mytimerange"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 100%;">
+                            <h3>SearchControls</h3>
+                            <div id="mysearchcontrols"></div>
+                        </td>
+                    </tr>
+
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 100%;">
+                            <h3>Timeline</h3>
+                            <div id="mytimeline"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 100%;">
+                            <h3>EventsViewer</h3>
+                            <div id="myeventsviewer"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 100%;">
+                            <h3>Table</h3>
+                            <div id="mytable"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 100%;">
+                            <h3>Chart</h3>
+                            <div id="mychart"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 33%;">
+                            <h3>Single</h3>
+                            <div id="mysingle"></div>
+                        </td>
+                        <td style="width: 34%;">
+                            <h3>TextInput</h3>
+                            <div id="mytextinput"></div>
+                        </td>
+                        <td style="width: 33%;">
+                            <h3>Checkbox</h3>
+                            <p>Check me:</p>
+                            <div id="mycheckbox"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 50%;">
+                            <h3>CheckboxGroup (static choices)</h3>
+                            <div id="mycheckboxgroup1"></div>
+                        </td>
+                        <td style="width: 50%;">
+                            <h3>CheckboxGroup (search-based choices)</h3>
+                            <div id="mycheckboxgroup2"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 50%;">
+                            <h3>RadioGroup (static choices)</h3>
+                            <div id="myradiogroup1"></div>
+                        </td>
+                        <td style="width: 50%;">
+                            <h3>RadioGroup (search-based choices)</h3>
+                            <div id="myradiogroup2"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 50%;">
+                            <h3>Dropdown (static choices)</h3>
+                            <div id="mydropdown1"></div>
+                        </td>
+                        <td style="width: 50%;">
+                            <h3>Dropdown (search-based choices)</h3>
+                            <div id="mydropdown2"></div>
+                        </td>
+                    </tr>
+
+
+                    <!-- Row -->
+                    <tr>
+                        <td style="width: 50%;">
+                            <h3>MultiDropdown (static choices)</h3>
+                            <div id="mymultidropdown1"></div>
+                        </td>
+                        <td style="width: 50%;">
+                            <h3>MultiDropdown (search-based choices)</h3>
+                            <div id="mymultidropdown2"></div>
+                        </td>
+                    </tr>
+
+                </table>
+            </html>
+        </panel>
+    </row>
+</dashboard>

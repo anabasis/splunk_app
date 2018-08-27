@@ -1,0 +1,12 @@
+<dashboard script="example_basicpage.js">
+  <label>01. Basic example</label>
+  <row>
+    <panel>
+      <html>
+        <h3>A chart and an events viewer displaying results of a search</h3>
+        <div id="mychart"/>
+        <div id="myeventsviewer"/>
+      </html>
+    </panel>
+  </row>
+</dashboard>

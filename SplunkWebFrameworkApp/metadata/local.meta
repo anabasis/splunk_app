@@ -1,0 +1,30 @@
+[app/ui]
+version = 7.1.2
+modtime = 1534437268.259285000
+
+[app/launcher]
+version = 7.1.2
+modtime = 1534437268.273171000
+
+[nav/default]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = nobody
+version = 7.1.2
+modtime = 1534435952.821440000
+
+[views/example_basicpage]
+owner = admin
+version = 7.1.2
+modtime = 1534438074.805176000
+
+[app/package/check_for_updates]
+version = 7.1.2
+modtime = 1534437268.283046000
+
+[views/example_all]
+access = read : [ * ], write : [ admin, power ]
+export = none
+owner = admin
+version = 7.1.2
+modtime = 1535121596.616677000
