@@ -16,7 +16,7 @@ modtime = 1534435952.821440000
 [views/example_basicpage]
 owner = admin
 version = 7.1.2
-modtime = 1534438074.805176000
+modtime = 1535554997.618791000
 
 [app/package/check_for_updates]
 version = 7.1.2
@@ -27,4 +27,4 @@ access = read : [ * ], write : [ admin, power ]
 export = none
 owner = admin
 version = 7.1.2
-modtime = 1535121596.616677000
+modtime = 1535555290.903331000

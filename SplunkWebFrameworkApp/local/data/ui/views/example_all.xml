@@ -1,19 +1,20 @@
-<dashboard script="example_all.js" >
-    <label>02.Collection of Views</label>
-    <row>
-        <panel>
-            <html>
+<dashboard script="example_all.js">
+  <label>02. Collection of Views</label>
+  <description>한 페이지에 가장 일반적인보기를 표시합니다. 검색 컨트롤을 검색 관리자와 동기화하는 방법과 정적 옵션 및 검색 기반 선택 항목으로 양식 컨트롤을 채우는 방법을 보여줍니다.</description>
+  <row>
+    <panel>
+      <html>
                 <p>This example shows how to set up the most common views using JavaScript. Tokens are used to keep the search controls in sync with the search manager.</p>
                 <table>
                     <!-- Row -->
                     <tr>
                         <td style="width: 80%;">
                             <h3>SearchBar</h3>
-                            <div id="mysearchbar"></div>
+                            <div id="mysearchbar"/>
                         </td>
                         <td style="width: 20%;">
                             <h3>TimeRange<br/>(also included with SearchBar)</h3>
-                            <div id="mytimerange"></div>
+                            <div id="mytimerange"/>
                         </td>
                     </tr>
 
@@ -21,7 +22,7 @@
                     <tr>
                         <td style="width: 100%;">
                             <h3>SearchControls</h3>
-                            <div id="mysearchcontrols"></div>
+                            <div id="mysearchcontrols"/>
                         </td>
                     </tr>
 
@@ -30,7 +31,7 @@
                     <tr>
                         <td style="width: 100%;">
                             <h3>Timeline</h3>
-                            <div id="mytimeline"></div>
+                            <div id="mytimeline"/>
                         </td>
                     </tr>
 
@@ -38,7 +39,7 @@
                     <tr>
                         <td style="width: 100%;">
                             <h3>EventsViewer</h3>
-                            <div id="myeventsviewer"></div>
+                            <div id="myeventsviewer"/>
                         </td>
                     </tr>
 
@@ -46,7 +47,7 @@
                     <tr>
                         <td style="width: 100%;">
                             <h3>Table</h3>
-                            <div id="mytable"></div>
+                            <div id="mytable"/>
                         </td>
                     </tr>
 
@@ -54,7 +55,7 @@
                     <tr>
                         <td style="width: 100%;">
                             <h3>Chart</h3>
-                            <div id="mychart"></div>
+                            <div id="mychart"/>
                         </td>
                     </tr>
 
@@ -62,16 +63,16 @@
                     <tr>
                         <td style="width: 33%;">
                             <h3>Single</h3>
-                            <div id="mysingle"></div>
+                            <div id="mysingle"/>
                         </td>
                         <td style="width: 34%;">
                             <h3>TextInput</h3>
-                            <div id="mytextinput"></div>
+                            <div id="mytextinput"/>
                         </td>
                         <td style="width: 33%;">
                             <h3>Checkbox</h3>
                             <p>Check me:</p>
-                            <div id="mycheckbox"></div>
+                            <div id="mycheckbox"/>
                         </td>
                     </tr>
 
@@ -79,11 +80,11 @@
                     <tr>
                         <td style="width: 50%;">
                             <h3>CheckboxGroup (static choices)</h3>
-                            <div id="mycheckboxgroup1"></div>
+                            <div id="mycheckboxgroup1"/>
                         </td>
                         <td style="width: 50%;">
                             <h3>CheckboxGroup (search-based choices)</h3>
-                            <div id="mycheckboxgroup2"></div>
+                            <div id="mycheckboxgroup2"/>
                         </td>
                     </tr>
 
@@ -91,11 +92,11 @@
                     <tr>
                         <td style="width: 50%;">
                             <h3>RadioGroup (static choices)</h3>
-                            <div id="myradiogroup1"></div>
+                            <div id="myradiogroup1"/>
                         </td>
                         <td style="width: 50%;">
                             <h3>RadioGroup (search-based choices)</h3>
-                            <div id="myradiogroup2"></div>
+                            <div id="myradiogroup2"/>
                         </td>
                     </tr>
 
@@ -103,11 +104,11 @@
                     <tr>
                         <td style="width: 50%;">
                             <h3>Dropdown (static choices)</h3>
-                            <div id="mydropdown1"></div>
+                            <div id="mydropdown1"/>
                         </td>
                         <td style="width: 50%;">
                             <h3>Dropdown (search-based choices)</h3>
-                            <div id="mydropdown2"></div>
+                            <div id="mydropdown2"/>
                         </td>
                     </tr>
 
@@ -116,16 +117,16 @@
                     <tr>
                         <td style="width: 50%;">
                             <h3>MultiDropdown (static choices)</h3>
-                            <div id="mymultidropdown1"></div>
+                            <div id="mymultidropdown1"/>
                         </td>
                         <td style="width: 50%;">
                             <h3>MultiDropdown (search-based choices)</h3>
-                            <div id="mymultidropdown2"></div>
+                            <div id="mymultidropdown2"/>
                         </td>
                     </tr>
 
                 </table>
             </html>
-        </panel>
-    </row>
+    </panel>
+  </row>
 </dashboard>
