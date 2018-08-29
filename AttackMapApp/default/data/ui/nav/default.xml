@@ -1,0 +1,4 @@
+<nav search_view="search" color="#65A637">
+	<view name="attack_threat_map_saved" default='true' />
+	<view name="attack_threat_map" />
+</nav>

@@ -1,0 +1,14 @@
+[]
+access = read : [ * ], write : [ admin, power ]
+
+[visualizations/attack_threat_map]
+export = system
+
+[transforms/attack_threat_map]
+export = system
+
+[macros/AttackMap%284%29]
+access = read : [ * ], write : [ * ]
+export = system
+owner = admin
+

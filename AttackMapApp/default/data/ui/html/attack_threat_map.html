@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Attack Threat Map with savedsearch</title>
+	<link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="/en-US/static/@f4c1eb50e0f3/css/build/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/en-US/static/@f4c1eb50e0f3/css/build/pages/dashboard-simple-bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="{{SPLUNKWEB_URL_PREFIX}}/static/app/APP_NAME/dashboard.css" />
+
+	<!-- ATTACK MAP -->
+	<link rel="stylesheet" href="{{SPLUNKWEB_URL_PREFIX}}/static/app/attack_threat_map/css/style.css" />
+</head>
+<body class="simplexml preload locale-en">
+<!--
+BEGIN LAYOUT
+This section contains the layout for the dashboard. Splunk uses proprietary
+styles in <div> tags, similar to Bootstrap's grid system.
+-->
+<header>
+	<a class="navSkip" href="#navSkip" tabindex="1">Screen reader users, click here to skip the navigation bar</a>
+		<div class="header splunk-header">
+			<div id="placeholder-splunk-bar">
+				<a href="{{SPLUNKWEB_URL_PREFIX}}/app/launcher/home" class="brand" title="splunk > listen to your data">splunk<strong>></strong></a>
+			</div>
+			<div id="placeholder-app-bar"></div>
+		</div>
+	<a id="navSkip"></a>
+</header>
+<div class="dashboard-body container-fluid main-section-body" data-role="main">
+	<div id="row1" class="dashboard-row dashboard-row1">
+		<div id="panel1" class="dashboard-cell">
+			<div class="dashboard-panel clearfix">
+				<div id="mysearchbarview"></div>
+				<div id="mysearchcontrolsview"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="row2" class="dashboard-row dashboard-row2">
+		<div id="panel_attackBody" class="dashboard-cell" style="width: 100%;height: 100%;">
+			<div class="dashboard-panel clearfix" style="width: 100%;height: 100%;">
+	<div id="attackBody">
+		<!--
+	    <div id="attackTimer" class="time">Ready</div>
+	    -->
+		<div id="clock">
+			<div class="date">{{ date }} {{ time }}</div>
+		</div>
+		<button id="fullScreenBtn" draggable="false" title="Full Screen" aria-label="Full Screen" type="button" style="background: none rgb(255, 255, 255); border: 0px; margin: 0px 14px; padding: 0px; position: relative; cursor: pointer; user-select: none; width: 25px; height: 25px; overflow: hidden; top: 0px; right: 10px;float: right;">
+			<img alt="" src="{{SPLUNKWEB_URL_PREFIX}}/static/app/attack_threat_map/images/fullscreen.png" draggable="false" >
+		</button>
+		<div id="attackMap">
+		</div>
+		
+	    <!-- attack_origins -->
+	    <div class="draggable in_box in_box_1 attack_origins" style="display:none;">
+	        <div class="in_box_header">
+	            <span>Attack Origins</span>
+	            <a href="#" class="inbox_close"><img src="{{SPLUNKWEB_URL_PREFIX}}/static/app/attack_threat_map/images/icon_inbox_close.png" alt="#" /></a>
+	        </div>
+	        <div class="contents">
+	            <ul class="list_header">
+	                <li>
+	                    <span class="no">#</span>
+	                    <span class="ctr_nm">COUNTRY</span>
+	                </li>
+	            </ul>
+	            <ul id="attackOriginBody" class="list_body">
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	            </ul>
+	        </div>
+	    </div>
+	    <!-- // attack_origins -->
+
+	    <!-- attack_targets -->
+	    <div class="draggable in_box in_box_2 attack_targets" style="display:none;">
+	        <div class="in_box_header">
+	            <span>Attack Targets</span>
+	            <a href="#" class="inbox_close"><img src="{{SPLUNKWEB_URL_PREFIX}}/static/app/attack_threat_map/images/icon_inbox_close.png" alt="#" /></a>
+	        </div>
+	        <div class="contents">
+	            <ul class="list_header">
+	                <li>
+	                    <span class="no">#</span>
+	                    <span class="ctr_nm">COUNTRY</span>
+	                </li>
+	            </ul>
+	            <ul id="attackTargetBody" class="list_body">
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	            </ul>
+	        </div>
+	    </div>
+	    <!-- // attack_targets -->
+
+	    <!-- attack_types -->
+	    <div class="draggable in_box in_box_3 attack_types" style="display:none;">
+	        <div class="in_box_header">
+	            <span>Attack Types</span>
+	            <a href="#" class="inbox_close"><img src="{{SPLUNKWEB_URL_PREFIX}}/static/app/attack_threat_map/images/icon_inbox_close.png" alt="#" /></a>
+	        </div>
+	        <div class="contents">
+	            <ul class="list_header">
+	                <li>
+	                    <span class="no">#</span>
+	                    <span class="type">TYPE</span>
+	                    <span class="atk_type">SERVICE</span>
+	                    <span class="port">PORT</span>
+	                </li>
+	            </ul>
+	            <ul id="attackTypeBody" class="list_body">
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	                <li><span class="no">&nbsp;</span> </li>
+	            </ul>
+	        </div>
+	    </div>
+	    <!-- // attack_types -->
+
+	    <!-- live_attacks -->
+	    <div class="draggable in_box in_box_4 live_attacks" style="display:none;">
+	        <div class="in_box_header">
+	            <span>Live Attacks</span>
+	            <a href="#" class="inbox_close"><img src="{{SPLUNKWEB_URL_PREFIX}}/static/app/attack_threat_map/images/icon_inbox_close.png" alt="#" /></a>
+	        </div>
+	        <div class="contents">
+	            <ul class="list_header">
+	                <li>
+	                    <span class="timestamp">timestamp</span>
+	                    <span class="source_ip">source ip</span>
+	                    <span class="dest_ctr">dest. country</span>
+	                    <span class="dest_city">dest. city</span>
+	                    <span class="atk_type" id="live_service">service</span>
+	                    <span class="port">port</span>
+	                </li>
+	            </ul>
+	            <div class="list_body_box">
+	                <ul id="liveAttackBody" class="list_body">
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                    <li><span class="timestamp">&nbsp;</span></li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- // live_attacks -->
+
+	    <!-- bottom_nav -->
+	    <div class="bottom_nav">
+	        <div class="tbl">
+	            <div class="tbl_c">
+	                <ul>
+	                    <li>
+	                        <a href="#" class="attack_origins">
+	                            <span>Attack Origins</span>
+	                            <span>off</span>
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#" class="attack_targets">
+	                            <span>Attack Targets</span>
+	                            <span>off</span>
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#" class="attack_types">
+	                            <span>Attack Types</span>
+	                            <span>off</span>
+	                        </a>
+	                    </li>
+	                    <li>
+	                        <a href="#" class="live_attacks">
+	                            <span>Live Attacks</span>
+	                            <span>off</span>
+	                        </a>
+	                    </li>
+	                </ul>
+	            </div>
+
+	            <div class="tbl_c">
+	                <ul>
+	                    <li>
+	                        <select id="mainColorSelector" style="line-height: 100%;">
+						<option value="#4A4A70">DEFAULT</option>
+						<option value="#1C649E">BLUE</option>
+						<option value="#049D7F">LIME</option>
+						<option value="#AB6100">ORANGE</option>
+						<option value="#951A8C">VIOLET</option>
+					</select>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+		
+	</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+<div id="container">
+	<div id="mapcontent">
+		
+
+
+	</div>
+	
+	<div id="mapfooter">
+
+    
+    
+	</div>
+
+
+</div>
+
+
+
+<!--
+END LAYOUT
+-->
+
+<script src="{{SPLUNKWEB_URL_PREFIX}}/config?autoload=1"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/i18ncatalog?autoload=1"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/build/simplexml/index.js"></script>
+<script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/attack_threat_map/js/ui.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+// <![CDATA[
+
+//
+// LIBRARY REQUIREMENTS
+//
+// In the require function, we include the necessary libraries and modules for
+// the HTML dashboard. Then, we pass variable names for these libraries and
+// modules as function parameters, in order.
+//
+// When you add libraries or modules, remember to retain this mapping order
+// between the library or module and its function parameter. You can do this by
+// adding to the end of these lists, as shown in the commented examples below.
+
+require([
+    "splunkjs/mvc",
+    "splunkjs/mvc/utils",
+    "splunkjs/mvc/tokenutils",
+    "underscore",
+    "jquery",
+    "splunkjs/mvc/simplexml",
+    "splunkjs/mvc/layoutview",
+    "splunkjs/mvc/simplexml/dashboardview",
+    "splunkjs/mvc/simplexml/dashboard/panelref",
+    "splunkjs/mvc/simplexml/element/chart",
+    "splunkjs/mvc/simplexml/element/event",
+    "splunkjs/mvc/simplexml/element/html",
+    "splunkjs/mvc/simplexml/element/list",
+    "splunkjs/mvc/simplexml/element/map",
+    "splunkjs/mvc/simplexml/element/single",
+    "splunkjs/mvc/simplexml/element/table",
+    "splunkjs/mvc/simpleform/formutils",
+    "splunkjs/mvc/simplexml/eventhandler",
+    "splunkjs/mvc/simplexml/searcheventhandler",
+    "splunkjs/mvc/simpleform/input/dropdown",
+    "splunkjs/mvc/simpleform/input/radiogroup",
+    "splunkjs/mvc/simpleform/input/linklist",
+    "splunkjs/mvc/simpleform/input/multiselect",
+    "splunkjs/mvc/simpleform/input/checkboxgroup",
+    "splunkjs/mvc/simpleform/input/text",
+    "splunkjs/mvc/simpleform/input/timerange",
+    "splunkjs/mvc/simpleform/input/submit",
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/savedsearchmanager",
+    "splunkjs/mvc/postprocessmanager",
+    "splunkjs/mvc/simplexml/urltokenmodel",
+    "splunkjs/mvc/searchbarview",
+    "splunkjs/mvc/searchcontrolsview",
+	"/static/app/attack_threat_map/attack_threat_map_view.js"
+    ],
+    function(
+        mvc,
+        utils,
+        TokenUtils,
+        _,
+        $,
+        DashboardController,
+        LayoutView,
+        Dashboard,
+        PanelRef,
+        ChartElement,
+        EventElement,
+        HtmlElement,
+        ListElement,
+        MapElement,
+        SingleElement,
+        TableElement,
+        FormUtils,
+        EventHandler,
+        SearchEventHandler,
+        DropdownInput,
+        RadioGroupInput,
+        LinkListInput,
+        MultiSelectInput,
+        CheckboxGroupInput,
+        TextInput,
+        TimeRangeInput,
+        SubmitButton,
+        SearchManager,
+        SavedSearchManager,
+        PostProcessManager,
+        UrlTokenModel,
+        SearchbarView,
+        SearchControlsView,
+        AttackDDoSView
+        ) {
+
+        var pageLoading = true;
+
+
+        //
+        // TOKENS
+        //
+
+        // Create token namespaces
+        var urlTokenModel = new UrlTokenModel();
+        mvc.Components.registerInstance('url', urlTokenModel);
+        var defaultTokenModel = mvc.Components.getInstance('default', {create: true});
+        var submittedTokenModel = mvc.Components.getInstance('submitted', {create: true});
+
+        urlTokenModel.on('url:navigate', function() {
+            defaultTokenModel.set(urlTokenModel.toJSON());
+            if (!_.isEmpty(urlTokenModel.toJSON()) && !_.all(urlTokenModel.toJSON(), _.isUndefined)) {
+                submitTokens();
+            } else {
+                submittedTokenModel.clear();
+            }
+        });
+
+        // Initialize tokens
+        defaultTokenModel.set(urlTokenModel.toJSON());
+
+        function submitTokens() {
+            // Copy the contents of the defaultTokenModel to the submittedTokenModel and urlTokenModel
+            FormUtils.submitForm({ replaceState: pageLoading });
+        }
+
+        function setToken(name, value) {
+            defaultTokenModel.set(name, value);
+            submittedTokenModel.set(name, value);
+        }
+
+        function unsetToken(name) {
+            defaultTokenModel.unset(name);
+            submittedTokenModel.unset(name);
+        }
+
+
+
+        //
+        // SEARCH MANAGERS
+        //
+        
+		// Create the search manager
+		var mysearch = new SearchManager({
+			id: "mysearch",
+			required_field_list: "*",
+			preview: true,
+			cache: true,
+			autostart: false, // Prevent the search from running automatically
+			//`AttackMap(,src_ip,dst_ip,'')`
+			search: "", //index=_internal | eval bitA=random() | eval ip=if(bitA<1,bitA+2147483648,bitA) | eval aaa=floor(ip/16777216) | eval bbb=floor((ip-aaa*16777216)/65536) | eval ccc=floor((ip-(aaa*16777216+bbb*65536))/256) | eval ddd=ip-(aaa*16777216+bbb*65536+ccc*256) | eval src_ip=tostring(ddd)+\".\"+tostring(ccc)+\".\"+tostring(bbb)+\".\"+tostring(aaa) | eval bitB=random() | eval ip2=if(bitB<1,bitB+2147483648,bitB) | eval aaa2=floor(ip2/16777216) | eval bbb2=floor((ip2-aaa2*16777216)/65536) | eval ccc2=floor((ip2-(aaa2*16777216+bbb2*65536))/256) | eval ddd2=ip2-(aaa2*16777216+bbb2*65536+ccc2*256) | eval dst_ip=tostring(ddd2)+\".\"+tostring(ccc2)+\".\"+tostring(bbb2)+\".\"+tostring(aaa2)| fields src_ip, dst_ip `AttackMap(,src_ip,dst_ip,'')`
+			earliest_time: "rt-30",
+          	latest_time: "rt"
+		});
+
+
+        //
+        // SPLUNK LAYOUT
+        //
+        $('header').remove();
+        new LayoutView({"hideFooter": false, "hideSplunkBar": false, "hideAppBar": false, "hideChrome": false})
+            .render()
+            .getContainerElement()
+            .appendChild($('.dashboard-body')[0]);
+
+        //
+        // DASHBOARD EDITOR
+        //
+
+        new Dashboard({
+            id: 'dashboard',
+            el: $('.dashboard-body'),
+            showTitle: true,
+            editable: true
+        }, {tokens: true}).render();
+
+
+        //
+        // VIEWS: VISUALIZATION ELEMENTS
+        //
+
+
+
+
+        //
+        //  Create views and add events
+        //
+
+	// Create the searchbar
+	var mysearchbar = new SearchbarView({
+		id: "mysearchbar",
+		managerid: "mysearch",
+		el: $("#mysearchbarview")
+	}).render();
+
+
+	var mysearchcontrols = new SearchControlsView({
+		id: "mysearchcontrols",
+		managerid: "mysearch",
+		el: $("#mysearchcontrolsview")
+	}).render();
+        
+        
+	// Create a custom view
+	var myview = new AttackDDoSView({
+		id: "myview",
+		managerid : "mysearch",
+		el: $("#attackMap"),
+		param1: "param1"
+	}, {tokens: true}).render();
+
+
+	// Listen for changes to the search query portion of the searchbar
+	mysearchbar.on("change", function() {
+		// Update the search query
+		mysearch.set("search", mysearchbar.val());
+
+		// Run the search (because autostart=false)
+		mysearch.startSearch();
+	});
+
+	// Listen for changes to the built-in timerange portion of the searchbar
+	mysearchbar.timerange.on("change", function() {
+		// Update the time range of the search
+		mysearch.search.set(mysearchbar.timerange.val()); 
+
+		// Run the search (because autostart=false)
+		mysearch.startSearch();
+	});
+
+
+
+
+	// Listen for changes to the search query portion of the searchbar
+	mysearchbar.on("change", function() {
+		// Update the search query
+		mysearch.set("search", mysearchbar.val());
+
+		// Run the search (because autostart=false)
+		mysearch.startSearch();
+	});
+
+	// Listen for changes to the built-in timerange portion of the searchbar
+	mysearchbar.timerange.on("change", function() {
+		// Update the time range of the search
+		mysearch.search.set(mysearchbar.timerange.val()); 
+
+		// Run the search (because autostart=false)
+		mysearch.startSearch();
+	});
+
+
+
+
+        // Initialize time tokens to default
+        if (!defaultTokenModel.has('earliest') && !defaultTokenModel.has('latest')) {
+            defaultTokenModel.set({ earliest: '0', latest: '' });
+        }
+
+        submitTokens();
+
+
+        //
+        // DASHBOARD READY
+        //
+
+        DashboardController.ready();
+        pageLoading = false;
+
+    }
+);
+// ]]>
+
+document.getElementById("fullScreenBtn").addEventListener("click", function () {
+	var doc = window.document;
+	var docEl = document.getElementById("panel_attackBody");
+
+	var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+	var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+	if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+		requestFullScreen.call(docEl);
+	} else {
+		cancelFullScreen.call(doc);
+}
+});
+</script>
+</body>
+</html>
