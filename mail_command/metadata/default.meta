@@ -1,0 +1,16 @@
+
+# Export CURL command and its settings system wide
+
+[commands/mail]
+access = read : [ * ], write : [ admin ]
+export = system
+
+[mail_command]
+access = read : [ * ], write : [ admin ]
+export = system
+
+[searchbnf/mail-command]
+export = system
+
+[searchbnf/mail-options]
+export = system
