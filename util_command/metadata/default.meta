@@ -14,3 +14,7 @@ export = system
 
 [searchbnf/mail-options]
 export = system
+
+[commands]
+access = read : [ admin ], write : [ admin ]
+export = system
