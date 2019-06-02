@@ -52,7 +52,6 @@ def mail_command(result,options):
         else:
             i_to_mail = result["to"]
 
-
         if options.has_key("contents"):
             i_contents = options.get('contents')
         else:
@@ -66,19 +65,18 @@ def mail_command(result,options):
 
         MESSAGE['To'] = i_to_mail
         MESSAGE['From'] = i_from_mail
-        # Create the body of the message (a plain-text and an HTML version).
-        #html = """[지능형 위협관리 시스템 관제] [일반] AWS Security Group Anyopen Port로 프로세스 실행 탐지(IOT)</h2> """
         html = i_contents
 
         HTML_BODY = MIMEText(html,'html',_charset="utf-8")
         MESSAGE.attach(HTML_BODY)
 
         gmail_user = i_from_mail
-        gmail_password = "itms!123"
+        gmail_password = "SMTP메일계정PW"
 
         to_mail = i_to_mail.split(";")
 
-        server = smtplib.SMTP('smtp.gmail.com:587')
+        #server = smtplib.SMTP('smtp.gmail.com:587')
+        server = smtplib.SMTP('smtp메일주소')
         server.ehlo()
         server.starttls()
         server.login(gmail_user,gmail_password)
