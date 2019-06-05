@@ -71,6 +71,7 @@ def mail_command(result,options):
         MESSAGE.attach(HTML_BODY)
 
         gmail_user = i_from_mail
+        # SMTP 메일 PW 입력
         gmail_password = "SMTP메일계정PW"
 
         to_mail = i_to_mail.split(";")
