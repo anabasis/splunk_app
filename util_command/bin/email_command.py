@@ -52,7 +52,6 @@ def mail_command(result,options):
         else:
             i_to_mail = result["to"]
 
-
         if options.has_key("contents"):
             i_contents = options.get('contents')
         else:
@@ -74,11 +73,12 @@ def mail_command(result,options):
         MESSAGE.attach(HTML_BODY)
 
         gmail_user = i_from_mail
-        gmail_password = "itms!123"
+        gmail_password = "<<페스워드>>"
 
         to_mail = i_to_mail.split(";")
 
-        server = smtplib.SMTP('smtp.gmail.com:587')
+        #server = smtplib.SMTP('smtp.gmail.com:587')
+        server = smtplib.SMTP('<<SMTP주소>>')
         server.ehlo()
         server.starttls()
         server.login(gmail_user,gmail_password)
@@ -103,7 +103,7 @@ logger.info("options : %s %s " ,options,type(options))
 # get the previous search results
 results,dummyresults,settings = splunk.Intersplunk.getOrganizedResults()
 # for each results, add a 'shape' attribute, calculated from the raw event text
-logger.info("START EMAIL LOOP COMMAND")
+# logger.info("START EMAIL LOOP COMMAND")
 
 for result in results:
     logger.info("    _raw : %s", result["_raw"])
