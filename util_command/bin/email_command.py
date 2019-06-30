@@ -65,20 +65,27 @@ def mail_command(result,options):
 
         MESSAGE['To'] = i_to_mail
         MESSAGE['From'] = i_from_mail
-        # Create the body of the message (a plain-text and an HTML version).
-        #html = """[지능형 위협관리 시스템 관제] [일반] AWS Security Group Anyopen Port로 프로세스 실행 탐지(IOT)</h2> """
         html = i_contents
 
         HTML_BODY = MIMEText(html,'html',_charset="utf-8")
         MESSAGE.attach(HTML_BODY)
 
         gmail_user = i_from_mail
+<<<<<<< HEAD
         gmail_password = "<<페스워드>>"
+=======
+        # SMTP 메일 PW 입력
+        gmail_password = "SMTP메일계정PW"
+>>>>>>> d2ae66d95cb198ccf382084060e803a6c94c9ecd
 
         to_mail = i_to_mail.split(";")
 
         #server = smtplib.SMTP('smtp.gmail.com:587')
+<<<<<<< HEAD
         server = smtplib.SMTP('<<SMTP주소>>')
+=======
+        server = smtplib.SMTP('smtp메일주소')
+>>>>>>> d2ae66d95cb198ccf382084060e803a6c94c9ecd
         server.ehlo()
         server.starttls()
         server.login(gmail_user,gmail_password)
