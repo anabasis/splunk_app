@@ -1,0 +1,293 @@
+<form>
+  <label>Splunk 내부 로그 모니터링</label>
+  <description></description>
+  <fieldset submitButton="false">
+    <input type="time" token="time" searchWhenChanged="true">
+      <label>조회 기간</label>
+      <default>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <html> 
+       <style>
+        .custom-title {
+        text-align: center;
+        background: #B2B9BB;
+            color: #1A1A1A;
+        font-size: 16px;
+        font-weight: bold;
+        padding:12px !important;
+        height:10px !important;
+        line-height:10px !important;
+    }
+    .panel-body.html {
+    padding: 0 !important;
+}
+        </style>
+      <div class="custom-title">
+        <span>Splunk 오류 발생 현황</span>
+        </div> </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <single>
+        <title>금일 ERROR 개수 (누적)</title>
+        <search>
+          <query>index=_internal source="*splunkd.log" log_level=ERROR host=* | bin span=1d _time| stats count by _time</query>
+          <earliest>-1d@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="colorBy">trend</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">0</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="trendInterval">-1d</option>
+        <option name="underLabel">어제 대비</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>금일 실시간 WARN 개수</title>
+        <search>
+          <query>index=_internal source="*splunkd.log" log_level=WARN host=* | bin span=1d _time| stats count by _time</query>
+          <earliest>-1d@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="colorBy">trend</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">0</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="trendInterval">-1d</option>
+        <option name="underLabel">어제 대비</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>DBX INPUT 에러</title>
+        <search>
+          <query>index=_internal sourcetype=dbx* sourcetype="dbx_audit" connection_name="*" host="*" state=error operation="dbinput" NOT (stanza_name="NMS_Event" "*IndexOutOfBoundsException*")
+| stats count</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="rangeColors">["0x53a051","0xf1813f","0xdc4e41"]</option>
+        <option name="rangeValues">[0,100]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="underLabel">건</option>
+        <option name="useColors">1</option>
+        <drilldown>
+          <link target="_blank">/app/iMan/dbx3_monitor</link>
+        </drilldown>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>DBX OUTPUT 에러</title>
+        <search>
+          <query>index=_internal sourcetype=dbx* sourcetype="dbx_audit" connection_name="*" host="*" stanza_name="*" state=error operation="dboutput"
+| stats count</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="drilldown">all</option>
+        <option name="rangeColors">["0x53a051","0xdc4e41"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="underLabel">건</option>
+        <option name="useColors">1</option>
+        <drilldown>
+          <link target="_blank">/app/iMan/dbx3_monitor</link>
+        </drilldown>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html> <div class="custom-title">
+        <span>Splunk 내부 로그 (splunkd.log) ERROR &amp; WARN 상세 </span>
+        </div> </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <input type="dropdown" token="errwarn" searchWhenChanged="true">
+        <label>log_level 선택</label>
+        <choice value="log_level=error OR log_level=warn">모두</choice>
+        <choice value="log_level=error">ERROR</choice>
+        <choice value="log_level=warn">WARN</choice>
+        <default>log_level=error</default>
+        <initialValue>log_level=error</initialValue>
+      </input>
+      <input type="dropdown" token="host" searchWhenChanged="true">
+        <search>
+          <query>index=_internal source="*splunkd.log" (log_level=error OR log_level=warn)| dedup host | table  host | sort host</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <default>*</default>
+        <fieldForLabel>host</fieldForLabel>
+        <fieldForValue>host</fieldForValue>
+        <choice value="*">모두</choice>
+      </input>
+      <input type="dropdown" token="component1" searchWhenChanged="true">
+        <label>Component - count</label>
+        <search>
+          <query>index=_internal  source="*splunkd.log" $errwarn$ | stats count by component | eval componentCount = component + " - " + count | sort -count</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <fieldForLabel>componentCount</fieldForLabel>
+        <fieldForValue>component</fieldForValue>
+        <choice value="*">All</choice>
+        <default>*</default>
+      </input>
+      <input type="text" token="search">
+        <label>검색 키워드</label>
+        <default>*</default>
+      </input>
+      <chart>
+        <title>Component 종류별 발생 추이</title>
+        <search>
+          <query>index=_internal  source="*splunkd.log"  $errwarn$ component=$component1$ $search$ host=$host$ |timechart limit=40 count by  component</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Splunk Server 호스트 별 오류(splunkd.log)</title>
+        <search>
+          <query>index=_internal  source="*splunkd.log"  $errwarn$ component=$component1$ $search$ host=$host$  host=splunk* |timechart count by host</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Forwarder 호스트 별 오류(splunkd.log)</title>
+        <search>
+          <query>index=_internal  source="*splunkd.log"  $errwarn$ component=$component1$ $search$ host=$host$  NOT  host=splunk* |timechart count by host</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>index=_internal source="*splunkd.log" $errwarn$ component=$component1$ $search$ host=$host$ 
+| table _time host log_level component _raw 
+| rename _time as "시간", _raw as "이벤트" 
+| convert ctime("시간") 
+| sort - "시간"</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>

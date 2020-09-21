@@ -1,7 +1,45 @@
 [app/ui]
-version = 7.1.2
+version = 7.2.1
 modtime = 1533959161.453076000
 
 [app/launcher]
-version = 7.1.2
+version = 7.2.1
 modtime = 1533959161.472898000
+
+[views/working_test]
+access = read : [ * ], write : [ admin ]
+export = system
+owner = admin
+version = 7.2.3
+modtime = 1548244467.812805000
+
+[views/splunk_search_performance_monitoring]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = admin
+version = 7.2.3
+modtime = 1548244852.048748000
+
+[views/splunk_internal_log_monitoring]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = admin
+version = 7.2.3
+modtime = 1548244861.071245000
+
+[views/splunk_schedule_job_monitoring]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = admin
+version = 7.2.3
+modtime = 1548244869.631602000
+
+[nav/default]
+version = 7.2.3
+modtime = 1548245242.902651000
+
+[]
+access = read : [ * ], write : [ admin, power ]
+export = system
+version = 7.2.3
+modtime = 1548247380.366728000

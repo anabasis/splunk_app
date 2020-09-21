@@ -1,0 +1,12 @@
+<nav search_view="search">
+  <view name="search" default='true' />
+  <view name="datasets" />
+  <view name="reports" />
+  <view name="alerts" />
+  <view name="dashboards" />
+  <collection label="Splunk Monitoring">
+  	<view name="splunk_search_performance_monitoring" />
+  	<view name="splunk_internal_log_monitoring" />
+  	<view name="splunk_schedule_job_monitoring" />
+  </collection>
+</nav>

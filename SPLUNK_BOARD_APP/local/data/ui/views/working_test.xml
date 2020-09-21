@@ -1,0 +1,195 @@
+<dashboard>
+  <label>working_view_test</label>
+  <row>
+    <panel>
+      <title>참고URL</title>
+      <html>
+        PYTHON Logging : <a href="http://hamait.tistory.com/880">http://hamait.tistory.com/880</a>
+        <br/>
+        PYTHON Logging : <a href="https://docs.python.org/2/library/logging.config.html#configuration-file-format">https://docs.python.org/2/library/logging.config.html#configuration-file-format</a>
+        <br/>
+        How to use the Splunk SDK for Python : <a href="http://dev.splunk.com/view/python-sdk/SP-CAAAEE9">http://dev.splunk.com/view/python-sdk/SP-CAAAEE9</a>
+        <br/>
+        Command line examples in the Splunk SDK for Python : <a href="http://dev.splunk.com/view/python-sdk/SP-CAAAEFK">http://dev.splunk.com/view/python-sdk/SP-CAAAEFK</a>
+        <br/>
+        How to run searches and jobs using the Splunk SDK for Python : <a href="http://dev.splunk.com/view/python-sdk/SP-CAAAEE5">http://dev.splunk.com/view/python-sdk/SP-CAAAEE5</a>
+<br/>CVE rest api
+<br/><a href="https://cve.circl.lu/api/">https://cve.circl.lu/api/</a>
+<br/>
+<br/><a href="https://cve.circl.lu/api/search/vendor">https://cve.circl.lu/api/search/vendor</a>
+<br/>vulnerable_configuration 버젼정보
+<br/>
+<br/><a href="https://cve.circl.lu/api/search/Apache">https://cve.circl.lu/api/search/Apache</a>
+<br/>vulnerable_configuration 버젼정보(Apache 국한)
+<br/>
+<br/>CVE search : <a href="https://github.com/cve-search/cve-search">https://github.com/cve-search/cve-search</a>
+<br/>CVE search Update : <a href="https://github.com/cve-search/CVE-Search-MT">https://github.com/cve-search/CVE-Search-MT</a>
+<br/>CVE Scan : <a href="https://github.com/NorthernSec/cve-scan">https://github.com/NorthernSec/cve-scan</a>
+<br/>CVE Portal : <a href="https://github.com/CIRCL/cve-portal">https://github.com/CIRCL/cve-portal</a>
+<br/><br/><br/>
+http://ec2-54-180-5-174.ap-northeast-2.compute.amazonaws.com:8000/ko-KR/app/ITMS_Account/dashboards
+<br/><br/>
+
+<br/>[클러스터링]
+<br/><a href="https://ko.wikipedia.org/wiki/K-%ED%8F%89%EA%B7%A0_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98" >K-MEANS</a>
+<br/><a href="https://www.nextobe.com/single-post/2018/02/26/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B3%BC%ED%95%99%EC%9E%90%EA%B0%80-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-5%EA%B0%80%EC%A7%80-%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98" >5가지 클러스터링 알고리즘</a>
+<br/><a href="http://t-lab.tistory.com/25" >BIRCH알고리즘</a>
+<br/><a href="https://elecs.tistory.com/167" >Spectral Clustering 알고리즘</a>
+
+<br/>
+<br/>
+<br/>https://github.com/passivetotal/splunk_app/blob/master/bin/ptupdns_command.py
+<br/>https://github.com/JustinAzoff/splunk-scripts/blob/master/makeyearly.py
+<br/>https://gist.github.com/LukeMurphey/7923903
+<br/>
+<br/>
+<br/>[PDF]
+<br/><a href="https://wedul.site/406" >https://wedul.site/406</a>
+<br/><a href="http://lemon421.cafe24.com/blog/textyle/23204" >http://lemon421.cafe24.com/blog/textyle/23204</a>
+<br/><a href="https://infotake.tistory.com/33" >https://infotake.tistory.com/33</a>
+<br/><a href="http://lemon421.cafe24.com/blog/textyle/23204" >http://lemon421.cafe24.com/blog/textyle/23204</a>
+<br/><a href="http://develop88.tistory.com/entry/jquery-html2canvas-div-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C" >http://develop88.tistory.com/entry/jquery-html2canvas-div-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C</a>
+<br/>
+<br/>
+
+<br/><a href="http://52.78.105.251:8000/ko-KR/static/app/itms/architecture.tar" >아키텍처</a>
+<br/><a href="https://fireburger.tistory.com/1" >CSS,SCSS</a>
+<br/><a href="https://heropy.blog/2018/01/31/sass/" >SCSS</a>
+<br/><a href="https://brunch.co.kr/@ourlove/55" >Bootstrap,SCSS</a>
+<br/>
+
+<br/>[Electron + Bootstrap]
+<br/><a href="https://blog.geun.kr/354" >https://blog.geun.kr/354</a>
+<br/><a href="https://www.npmjs.com/package/bootstrap-electron" >https://www.npmjs.com/package/bootstrap-electron</a>
+<br/><a href="https://medium.com/@sungyong/electron-vue%EB%A1%9C-desktop-application-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-758947912e92" >https://medium.com/@sungyong/electron-vue%EB%A1%9C-desktop-application-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-758947912e92</a>
+<br/><a href="https://jinblog.kr/189" >https://jinblog.kr/189</a>
+<br/><a href="https://www.clien.net/service/board/lecture/12267795" >https://www.clien.net/service/board/lecture/12267795</a>
+<br/>
+
+<br/>[Apache + nodejs]
+<br/><a href="https://ghwlchlaks.github.io/nodejs-apache" >https://ghwlchlaks.github.io/nodejs-apache</a>
+<br/><a href="http://blog.naver.com/minisv/220365372144" >http://blog.naver.com/minisv/220365372144</a>
+<br/><a href="https://xetown.com/questions/598545" >https://xetown.com/questions/598545</a>
+<br/><a href="http://blog.napier.kr/blog/2015/11/27/node-js-2-hello-nodejs/" >http://blog.napier.kr/blog/2015/11/27/node-js-2-hello-nodejs/</a>
+<br/>
+
+
+<br/>[PhantomJS]
+<br/><a href="https://tyle.io/blog/72" >https://tyle.io/blog/72</a>
+<br/><a href="https://ko.wikipedia.org/wiki/PhantomJS" >https://ko.wikipedia.org/wiki/PhantomJS</a>
+<br/><a href="https://medium.com/chequer/springboot-phantomjs%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4-%EB%B0%94%EC%BD%94%EB%93%9C-qr-%EC%BD%94%EB%93%9C%EA%B0%80-%ED%8F%AC%ED%95%A8%EB%90%9C-%EB%8F%99%EC%A0%81-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%BF%A0%ED%8F%B0-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EA%B8%B0-17fc00dd83fb" >https://medium.com/chequer/springboot-phantomjs%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4-%EB%B0%94%EC%BD%94%EB%93%9C-qr-%EC%BD%94%EB%93%9C%EA%B0%80-%ED%8F%AC%ED%95%A8%EB%90%9C-%EB%8F%99%EC%A0%81-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%BF%A0%ED%8F%B0-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EA%B8%B0-17fc00dd83fb</a>
+<br/><a href="http://afrobambacar.github.io/2016/03/%EB%88%88%EC%97%90-%EB%B3%B4%EC%9D%B4%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-phantomjs.html" >http://afrobambacar.github.io/2016/03/%EB%88%88%EC%97%90-%EB%B3%B4%EC%9D%B4%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-phantomjs.html</a>
+<br/><a href="http://yujuwon.tistory.com/entry/PhantomJS-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0" >http://yujuwon.tistory.com/entry/PhantomJS-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0</a>
+<br/><a href="http://brownbears.tistory.com/363" >http://brownbears.tistory.com/363</a>
+<br/><a href="https://programmingsummaries.tistory.com/365" >설치방법3가지</a>
+<br/>
+<br/>
+
+<pre>
+#-*- coding: utf-8 -*-
+#!/usr/bin/env python
+import json
+if __name__ == "__main__":
+    with open("C:\\Users\\guho.lee\\Desktop\\cve-search\\nvd\\nvdcve-1.0-2018\\nvdcve-1.0-2018.json") as f:
+        data = json.load(f)
+
+    for item in data["CVE_Items"]:
+        try:
+            score = item["impact"]["baseMetricV2"]["impactScore"]
+        except KeyError:
+            continue
+
+        if float(score) >= 9.0:
+            print ("[CVE] " + item["cve"]["CVE_data_meta"]["ID"])
+            venders = item["cve"]["affects"]["vendor"]["vendor_data"]
+            for vender in venders:
+                print ("[VENDER] " + vender["vendor_name"])
+                products = vender["product"]["product_data"]
+                for product in products:
+                    print ("[PRODUCT] " + product["product_name"])
+                    versions = product["version"]["version_data"]
+                    for version in versions:
+                        print ("[VERSION] " + version["version_value"])
+</pre>
+<br/>
+
+<pre>
+import splunk
+settings = splunk.clilib.cli_common.getConfStanza('smartexporter', 'setup')
+email_host = settings['email_host']
+temp_output = settings['temp_output']
+email_port = settings['email_port']
+email_user = settings['email_user']
+email_pwd = settings['email_pwd']
+splunk_home = os.environ['SPLUNK_HOME']
+template_path = "etc/apps/smart_exporter_app/appserver/static/templates"
+phantomjs_path = settings['phantomjs_path']
+</pre>
+<br/>
+
+<pre>
+def setup_logger():
+    logger = logging.getLogger('samrt_services')
+    logger.propagate = False
+    logger.setLevel(logging.DEBUG)
+
+    file_handler = logging.handlers.RotatingFileHandler(
+                    make_splunkhome_path(['var', 'log', 'splunk',
+                                          'smartexporter_services.log']),
+                                        maxBytes=25000000, backupCount=5)
+
+    formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+    file_handler.setFormatter(formatter)
+
+    logger.addHandler(file_handler)
+    return logger
+</pre>
+<br/>
+
+
+<pre>
+import splunk.appserver.mrsparkle.controllers as controllers
+class service(controllers.BaseController):
+
+    def render_json(self, response_data, set_mime="text/json"):
+        cherrypy.response.headers["Content-Type"] = set_mime
+        ....
+
+    @route('/:action=sendpdfexport/:pdf/:id/:step/:total/:scheduleparams')
+    @expose_page(must_login=False, methods=['GET','POST'])
+    def sendpdfexport(self, pdf, id, step, total, scheduleparams, **kwargs):
+        ....
+</pre>
+<br/>
+
+      </html>
+    </panel>
+    <!--
+    <panel>
+      <title>URL 추출</title>
+      <table>
+        <search>
+          <query>index=account* "returnURL*" earliest=-30m@m latest=now
+| where isnotnull(returnURL) 
+| search returnURL != null
+| rex field=returnURL "(?&lt;url&gt;((https|http)\://([a-z]|\.)+\/))"
+| stats count by url
+| sort - count
+| head 5</query>
+          <earliest>-1m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    -->
+  </row>
+</dashboard>

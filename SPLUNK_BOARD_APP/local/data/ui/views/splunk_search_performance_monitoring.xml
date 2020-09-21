@@ -1,0 +1,234 @@
+<form>
+  <label>Splunk 검색성능 모니터링</label>
+  <search id="user_base">
+    <query>index=_audit host=splunk*sh* action=search sourcetype=audittrail search_id!="rsa_*"
+| eval user=if((user == "n/a"),null(),user), search=if((isnull(savedsearch_name) OR (savedsearch_name == "")),search,savedsearch_name) 
+| rex "total_run_time\=(?&lt;A_total_run_time&gt;.+)\,\sevent_count\="
+| stats min(_time) as _time, values(user) as user, max(A_total_run_time) as runtime, first(search) as search by host search_id 
+| where isnotnull(search)
+| stats max(runtime) AS max_runtime avg(runtime) AS avg_runtime count(search) as count max(_time) as last_use by host user 
+| eval last_use=strftime(last_use,"%F %T"), avg_runtime=round(avg_runtime, 3)
+| fields user, host, count, max_runtime, avg_runtime , last_use
+| sort -max_runtime
+| rename count as "Search Count" max_runtime AS "Max Runtime(s)" last_use as "Last Search" user as User avg_runtime AS "Average Runtime(s)"</query>
+    <earliest>$time.earliest$</earliest>
+    <latest>$time.latest$</latest>
+  </search>
+  <fieldset submitButton="false">
+    <input type="time" token="time" searchWhenChanged="true">
+      <label>검색기간</label>
+      <default>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row id="style_row">
+    <panel>
+      <html>
+      <style>
+        #style_row {display:none !important;}
+        
+        #user_row table th, #user_row table td {border:1px solid #bfbfbf !important;}
+        #user_row table th:first-child, #user_row table td:first-child {border-left:0px !important;}
+        #user_row table th:last-child, #user_row table td:last-child {border-right:0px !important;}
+        #user_row table th {font-weight:bold !important; text-align:center !important;}
+        #user_row table td {text-align:center !important;}
+      </style>
+    </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <div class="custom-title">
+          <span>Search Head 사용자 별 검색 실행내역</span>
+        </div>
+      </html>
+    </panel>
+  </row>
+  <row id="user_row">
+    <panel>
+      <table>
+        <title>splunk_search1</title>
+        <search base="user_base">
+          <query>| search host="splunk_apne2_sh01" | fields - host "Last Search"</query>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>splunk_search2</title>
+        <search base="user_base">
+          <query>| search host="splunk_apne2_sh02" | fields - host "Last Search"</query>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>splunk_search3</title>
+        <search base="user_base">
+          <query>| search host="splunk_apne2_sh03" | fields - host "Last Search"</query>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>splunk_search4</title>
+        <search base="user_base">
+          <query>| search host="splunk_apne2_sh04" | fields - host "Last Search"</query>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>splunk_search5</title>
+        <search base="user_base">
+          <query>| search host="splunk_apne2_sh05" | fields - host "Last Search"</query>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>인덱서 서버 데이터 저장 (KB)</title>
+        <search>
+          <query>(index=_internal host=splunk*idx* source="*metrics.log" sourcetype=splunkd group=per_Index_thruput) 
+| eval ingest_pipe=if(isnotnull(ingest_pipe),ingest_pipe,"none") 
+| timechart  sum(kb) by host</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>검색 실행 건수 추이</title>
+        <search>
+          <query>index=_audit host=splunk*sh*  action=search sourcetype=audittrail search_id!="rsa_*" | timechart count(search_id) by host</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>실행시간 30초 이상 검색문 추이</title>
+        <search>
+          <query>index=_audit host=splunk*sh* action=search sourcetype=audittrail search_id!="rsa_*" total_run_time&gt;=30 
+| timechart count by host</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>검색 소요시간 Top 100 (Second)</title>
+      <input type="dropdown" token="host" searchWhenChanged="true">
+        <label>host</label>
+        <choice value="*">전체</choice>
+        <default>*</default>
+        <fieldForLabel>host</fieldForLabel>
+        <fieldForValue>host</fieldForValue>
+        <search>
+          <query>index=_audit host=splunk*sh* action=search sourcetype=audittrail search_id!="rsa_*" 
+| fields host 
+| dedup host 
+| table host
+| sort 0 host</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+        </search>
+      </input>
+      <input type="dropdown" token="user" searchWhenChanged="true">
+        <label>User</label>
+        <choice value="*">전체</choice>
+        <default>*</default>
+        <fieldForLabel>user</fieldForLabel>
+        <fieldForValue>user</fieldForValue>
+        <search>
+          <query>index=_audit host=$host$ action=search sourcetype=audittrail search_id!="rsa_*" 
+| fields user 
+| eval user=if((user == "n/a"),null(),user) 
+| dedup user 
+| table user
+| sort 0 user</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+        </search>
+      </input>
+      <input type="text" token="keyword" searchWhenChanged="true">
+        <label>Keyword</label>
+        <default>*</default>
+      </input>
+      <table>
+        <search>
+          <query>index=_audit host=splunk*sh* action=search sourcetype=audittrail search_id!="*rsa_*"
+| rex "search\=\'(?ms)(?&lt;A_search&gt;.+)\'\,\s+autojoin\="
+| rex "total_run_time\=(?&lt;A_total_run_time&gt;.+)\,\sevent_count\="
+| eval user=if((user == "n/a"),null(),user) , search_type=case(match(search_id,"^SummaryDirector_"),"summarization",match(search_id,"scheduler__|alertsmanager_"),"scheduled",match(search_id,"\d{10}\.\d+(_[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})?"),"ad hoc",true(),"other"), search=if((isnull(savedsearch_name) OR (savedsearch_name == "")),A_search,savedsearch_name) 
+| stats min(_time) as _time, values(user) as user, max(A_total_run_time) as total_run_time, values(search) as search, first(search_type) as search_type, first(apiStartTime) as apiStartTime, first(apiEndTime) as apiEndTime by host search_id 
+| where isnotnull(search) 
+| eval search_id=replace(search_id, "\d+\.\d+", "")
+| join type=left host search_id 
+    [ search index=_introspection host=splunk_search* data.search_props.sid=* 
+    | dedup data.search_props.sid 
+    | table host data.search_props.sid data.search_props.provenance 
+    | rename data.search_props.sid AS search_id data.search_props.provenance AS dashboard_name 
+    | eval search_id="'".replace(search_id, "\d+\.\d+", "")."'"] 
+| eval search=if(like(dashboard_name, "UI:Dashboard%"), dashboard_name." - ".search, search)
+| fields search, host, total_run_time, _time, apiStartTime, apiEndTime, search_type, user 
+| eval earliest=case((like(apiStartTime,"%ZERO_TIME%") AND like(apiEndTime,"%ZERO_TIME%")),"all time",like(apiStartTime,"%ZERO_TIME%"),"-",true(),apiStartTime), latest=case((like(apiStartTime,"%ZERO_TIME%") AND like(apiEndTime,"%ZERO_TIME%")),"all time",like(apiEndTime,"%ZERO_TIME%"),"-",true(),apiEndTime), _time=strftime(_time,"%Y-%m-%d %H:%M:%S") 
+| search search="*$keyword$*" host="$host$" user="$user$"
+| sort 100 - total_run_time 
+| fields search, total_run_time, _time, earliest, latest, search_type, host, user 
+| rename _time as "Search Start", earliest as "Earliest Time", latest as "Latest Time", search as Search, search_type as Type, total_run_time as "Search Runtime(Sec)", user as User</query>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+</form>
